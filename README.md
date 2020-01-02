@@ -28,7 +28,7 @@ where $CA$ represents the chronological age (true age) of the individual, and $s
 2. To run Biological_Age_Application.py : Python 2.7 with Anaconda
 3. StudyReplicationReversedF.sas : SAS 9.0+
 
-## IMPORTANT NOTES: 
+## Important Notes: 
 1. Note that the cache is intended to save the calculated parameters. Therefore, if you change your dataset and need to update parameters, you must DELETE the cache file(s).  
 2. For best use of biological age in general, it is important to run correlations on your dataset features to include only those features which are significantly correlated with age.
 
@@ -116,12 +116,12 @@ The output is simply a float array of all the corrected Biological Ages for each
     
     return (stats)
 
-### Output Explained
+## Output Explained
 An example output, saved to a csv file, will appear like so:
 ![results](images/Output_ex.png)
 The complete dataset is still visible, but two columns appear at the end of the file: `BA` and `BAC`. `BA` is defined above in **Background** as the initial, uncorrected Biological Age. `BAC` is also defined above as the corrected Biological Age based both on `BA` and on the true chronological age of the individual.
 
-### Hyperparameters
+## Hyperparameters
 There are two hyperparameters in this code:  
 1. `GRAPHON` : With `GRAPHON = True`, the simple linear regression plots for each feature regressed against age will show upon calculation of the linear regression (calculations only occur when the cache file does not exist). This option is turned off by default (`GRAPHON = False`) because the graphs require the `ggplot` package, which currently requires some tweaking to make work without error due to version upgrade issues.  
 2. `AGEON` : This is a linear transformation of the SBA variable (_see paper_) that was conducted in the original paper  
