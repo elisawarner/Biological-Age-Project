@@ -10,11 +10,11 @@ This project is based off the paper "Modeling the Rate of Senescence: Can Estima
 
 ## Background
 In the original study, Levine applies the NHANES III dataset to the Klemera-Doubal Method. She first calculates a biological age of an individual based on the following equation:
-![](BA.png)
+![](images/BA.png)
 where $q$ represents the intercept, $k$ represents the slope, and $s$ represents the MSE of every feature column $j$ regressed against age.  
 
 She then calculates the Corrected Biological Age of the same individual based on the following equation:
-![](BAC.png)
+![](images/BAC.png)
 where $CA$ represents the chronological age (true age) of the individual, and $s^2$ represents an age- and r-value-corrected MSE.
 
 ## Files Included:
@@ -118,7 +118,7 @@ The output is simply a float array of all the corrected Biological Ages for each
 
 ### Output Explained
 An example output, saved to a csv file, will appear like so:
-![results](Output_ex.png)
+![results](images/Output_ex.png)
 The complete dataset is still visible, but two columns appear at the end of the file: `BA` and `BAC`. `BA` is defined above in **Background** as the initial, uncorrected Biological Age. `BAC` is also defined above as the corrected Biological Age based both on `BA` and on the true chronological age of the individual.
 
 ### Hyperparameters
