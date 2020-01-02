@@ -3,9 +3,16 @@
 **Author:** Elisa Warner  
 **Date of Last Update:** Dec 23, 2019  
 
-**Description:** This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/). It features my original SAS implementation of the project, then a cleaner python script. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, a "One Group" version is available, which includes no stratification.
+**Description:** This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). It features my original SAS implementation of the project, then a cleaner python script. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, a "One Group" version is available, which includes no stratification.
 
-In the original study, Levine uses NHANES III data to calculate the 
+## Background
+In the original study, Levine applies the NHANES III dataset to the Klemera-Doubal Method. She first calculates a biological age of an individual based on the following equation:
+![](BA.png)
+where $q$ represents the intercept, $k$ represents the slope, and $s$ represents the MSE of every feature column $j$ regressed against age.  
+
+She then calculates the Corrected Biological Age of the same individual based on the following equation:
+![](BAC.png)
+where $CA$ represents the chronological age (true age) of the individual, and $s^2$ represents an age- and r-value-corrected MSE.
 
 ## Files Included:
 1. BA_NB_Final_V2.ipynb
@@ -96,3 +103,5 @@ The output is simply a float array of all the corrected Biological Ages for each
     return (stats)
 
 ### Output Explained
+
+### Hyperparameters
