@@ -1,7 +1,7 @@
 # Biological Age Project for Python README
 
 **Author:** Elisa Warner  
-**Date of Last Update:** Dec 23, 2019  
+**Date of Last Update:** Jan 2, 2020  
 **Contact: elisawa@umich.edu**  
 _Author's Note:_ The Python Notebook version `BA_NB_Final_V2.ipynb` is the most up-to-date. There is an older version of the python code called `Biological_Age_Application.py`. This is the next target for update.
 
