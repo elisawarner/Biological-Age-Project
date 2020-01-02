@@ -6,7 +6,11 @@
 _Author's Note:_ The Python Notebook version `BA_NB_Final_V2.ipynb` is the most up-to-date. There is an older version of the python code called `Biological_Age_Application.py`. This is the next target for update.
 
 ## Description
-This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). It features my original SAS implementation of the project, then a cleaner python script. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, a "One Group" version is available, which includes no stratification.
+This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). It features my original SAS implementation of the project, then a cleaner python script. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, you can create "One Group" version is available, which includes no stratification (See _How to Use_).
+
+## What to Expect
+1. **Input:** A dataset of subjects, where the features for each subject is thought to predict age  
+2. **Output:** The same dataset returned, except with two extra columns: 1) the calculated biological age of the subject, 2) the corrected biological age of the subject, utilizing the true chronological age of the subject.
 
 ## Background
 In the original study, Levine applies the NHANES III dataset to the Klemera-Doubal Method. She first calculates a biological age of an individual based on the following equation:
@@ -50,7 +54,7 @@ To use this code, the program requires a delimited text file (either .csv, .tsv,
     trainset_list.insert(0, header_names)
 
 ### Example Code 1
-In the most simple example, our dataset is set up according to **Dataset Setup** above. And we have one dataset (not split into training and testing). The variables `age_index`, `genderindex`, `primaryindex`, `samp_wt_index` are the python indices of the age, group, seqn, and sample_wt columns, respectively. 
+In the most simple example, our dataset is set up according to _Dataset Setup_ above. And we have one dataset (not split into training and testing). The variables `age_index`, `genderindex`, `primaryindex`, `samp_wt_index` are the python indices of the age, group, seqn, and sample_wt columns, respectively. 
 
 **Cache**  
 `cachename` is the name of a cache file. If no cache file exists yet, assign any name. The cache file will be created automatically. It saves all the calculated parameters so that training and testing can be possible (the biological ages of the test set are simply based off of the saved parameters from the training set's cache file). The `cachename` argument allows users to save multiple cache files for more efficient execution.
@@ -119,7 +123,7 @@ The output is simply a float array of all the corrected Biological Ages for each
 ## Output Explained
 An example output, saved to a csv file, will appear like so:
 ![results](images/Output_ex.png)
-The complete dataset is still visible, but two columns appear at the end of the file: `BA` and `BAC`. `BA` is defined above in **Background** as the initial, uncorrected Biological Age. `BAC` is also defined above as the corrected Biological Age based both on `BA` and on the true chronological age of the individual.
+The complete dataset is still visible, but two columns appear at the end of the file: `BA` and `BAC`. `BA` is defined above in _Background_ as the initial, uncorrected Biological Age. `BAC` is also defined above as the corrected Biological Age based both on `BA` and on the true chronological age of the individual.
 
 ## Hyperparameters
 There are two hyperparameters in this code:  
