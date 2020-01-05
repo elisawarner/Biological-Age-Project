@@ -81,9 +81,7 @@ The output is simply a float array of all the corrected Biological Ages for each
         testset['seqn'] = range(1,testset.shape[0]+1)
         testset['group'] = 1
         testset['samp_wt'] = 1
-    
-        testset = testset.drop(['GROUP', 'Days_alive', 'age_months'], axis = 1)
-        trainset = trainset.drop(['GROUP', 'Days_alive', 'age_months'], axis = 1)
+
         #print(testset.shape, trainset.shape)
     
         # convert DataFrame to List Format
@@ -112,9 +110,8 @@ The output is simply a float array of all the corrected Biological Ages for each
         # test using trained model
         test_model = BA.Methods(testset_list, cachename, age = age_index, genderindex = genderindex, primarykey = primaryindex, samp_wt = samp_wt_index)
         results = test_model.KDM()
-        results = pd.DataFrame(results[1:], columns = results[0])
-        # test_results = test_results.append(results) # this was designed for 5-fold cross validation, so it would append the results of each fold into one dataframe
-
+        results = pd.DataFrame(results[1:], columns = results[0]
+        
         # calculate stats
         stats = return_stats(results['BAC'].astype('float64'), results['age_days'].astype('float64')) # output Biological Age, Corrected
     
