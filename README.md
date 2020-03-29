@@ -3,7 +3,8 @@
 **Author:** Elisa Warner  
 **Date of Last Update:** March 29, 2020  
 **Contact: elisawa@umich.edu**  
-**Version: 2.0**
+**Version: 2.0**  
+**Note: If you want any customizations to the code, I am willing to do this for free with credit to the author**
 
 ## Description
 This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). Featured below is an implementation in Python. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, you can create "One Group" version is available, which includes no stratification (See _How to Use_).
