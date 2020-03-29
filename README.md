@@ -9,6 +9,15 @@
 ## Description
 This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). Featured below is an implementation in Python. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, you can create "One Group" version is available, which includes no stratification (See _How to Use_).
 
+## New In This Version:
+Version 2.0 contains the following updates from the previous version:
+* Removed SAS implementation
+* Removed Python 2.7 implementation
+* Included automatic group detection for up to 2 groups
+* Allow inputs to be DataFrames instead of a list
+* Included KDM_model as built-in function for the function library, rather than a function you have to write
+* Included a result_stat function which summarizes results against age
+
 ## What to Expect
 1. **Input:** 
 * A DataFrame of subjects, where the features for each subject is thought to predict age  
