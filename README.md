@@ -17,6 +17,7 @@ Version 2.0 contains the following updates from the previous version:
 * Allow inputs to be DataFrames instead of a list
 * Included KDM_model as built-in function for the function library, rather than a function you have to write
 * Included a result_stat function which summarizes results against age
+* Removed ability of graph to plot SLR of age against age, seqn, sex, samp_wt
 
 ## What to Expect
 1. **Input:** 

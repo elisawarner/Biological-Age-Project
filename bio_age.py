@@ -7,13 +7,14 @@
 # * I made automatic groups detection (detects 1 or 2 groups)
 # * Removed ggplot and changed Visualize.plots() to plot with matplotlib
 # * The code is now compatible with pandas DataFrames. Just load in the DataFrame instead of converting to list.
+# * Removed graph's ability to show SLR results of age, primarykey, samp_wt, sex against age (skip loop if idx belongs to important indices)
 # 
 # Edits 7/15/2019:  
 # * I changed one line so that it's no longer reliable on column names being specifically 'age', 'seqn', 'group', etc.
 # * Edited so it works as an importable notebook  
 #     **Note: if you want to change the parameters GRAPHON or AGEON, you have to do it through the KDM method in the Methods Class in self.__init__()
 
-# In[18]:
+# In[27]:
 
 
 from numpy import mean, corrcoef, array
@@ -26,9 +27,10 @@ import pandas as pd
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+import datetime
 
 
-# In[2]:
+# In[5]:
 
 
 """BIOLOGICAL AGE ALGORITHM
@@ -58,7 +60,7 @@ Visualize:
 
 # ### Open Data
 
-# In[28]:
+# In[6]:
 
 
 ################## CLASS SUMMARY #######################
@@ -163,7 +165,7 @@ class Summary(object):
         return (corrlist1, corrlist2)
 
 
-# In[16]:
+# In[21]:
 
 
 
@@ -394,13 +396,16 @@ class Methods(object):
         
 
             # REGRESSION PART #
-            for col in self.heading:
+            for idx,col in enumerate(self.heading):
                 #print(col)
+                if idx in [self.age, self.primarykey, self.genderindex, self.samp_wt]:
+                    continue
+                
                 regX = np.array(self.df[list(self.df)[self.age]]).reshape(-1, 1) #age
                 regY = np.array(self.df[[col]]) #other var
 
                 regr = linear_model.LinearRegression()
-                # slope, intercept, r_value, p_value, std_err = stats.linregress(x,y) TRY THIS
+
                 try:
                 # Train the model using the training sets
                     weight = np.array(self.get_column(self.samp_wt)).reshape(len(self.get_column(self.samp_wt)),1)
@@ -435,7 +440,7 @@ class Methods(object):
                     # weighted vs unweighted corr seems to make no difference
                     r_value = self.corr(regX, regY, weight) #stats.pearsonr(regX,regY)[0][0]
                     std_err = math.sqrt(mean((regr.predict(regX) - regY) ** 2))
-                    #print slope, intercept, r_value, std_err
+                    #print(slope, intercept, r_value, std_err)
 
                 except:
                     print("Cannot do LINEAR REGRESSION analysis for %s" % (col))
@@ -445,7 +450,7 @@ class Methods(object):
                     std_err = 0
 
                 #CHECK THAT ONLY PROPER VALUES ARE ADDED
-                if slope and intercept and r_value and std_err != 0 and self.heading.index(col) != self.age and self.heading.index(col) != self.primarykey and self.heading.index(col) != self.genderindex and self.heading.index(col) != self.samp_wt:
+                if slope and intercept and r_value and std_err != 0:
                     #add to dictionaries
                     self.regressiondict[col] = (slope, intercept, r_value, std_err)
 
@@ -503,7 +508,7 @@ class Methods(object):
             return (len(col1), len(col2))
 
 
-# In[5]:
+# In[22]:
 
 
 class Visualize(object):
@@ -513,7 +518,7 @@ class Visualize(object):
     def view(self):
         return self.data
 
-    def plot(self, inp1, inp2, inp3=None):
+    def plot(self, inp1, inp2, inp3): # (y, x, color by)
         new_df = pd.DataFrame()
 
         new_df[inp1] = pd.to_numeric(self.data[inp1])
@@ -534,7 +539,7 @@ class Visualize(object):
 
 # ### Run Function
 
-# In[5]:
+# In[23]:
 
 
 def KDM_model(trainset, testset, cachename, output_filename, age_index, genderindex, primaryindex, samp_wt_index):
@@ -558,7 +563,7 @@ def KDM_model(trainset, testset, cachename, output_filename, age_index, genderin
 
 # ### Return Stats
 
-# In[4]:
+# In[24]:
 
 
 #Return statistics for a correlation
@@ -573,10 +578,9 @@ def return_stats(x,y, dec=3):
     return(Mr, Medr, Mpr, p_value, rs)
 
 
-# In[61]:
+# In[11]:
 
 
-import datetime
 print('You are running BA_NB_Final at', datetime.datetime.now())
 
 
