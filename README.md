@@ -3,7 +3,10 @@
 **Author:** Elisa Warner  
 **Date of Last Update:** Jan 2, 2020  
 **Contact: elisawa@umich.edu**  
-_Author's Note:_ The Python Notebook version `BA_NB_Final_V2.ipynb` is the most up-to-date. There is an older version of the python code called `Biological_Age_Application.py`. This is the next target for update.
+**Version: 1.2**
+_Author's Note:_ The Python Notebook version `BA_NB_Final_V2.ipynb` is the most up-to-date. There is an older version of the python code called `Biological_Age_Application.py`. This a version 1.0 and is the next target for update.
+
+### Note March 28, 2020: This code will be updated soon for better usability. Please do not fork the repository until this version update is complete.
 
 ## Description
 This project is based off the paper "Modeling the Rate of Senescence: Can Estimated Biological Age Predict Mortality More Accurately Than Chronological Age?" by Morgan Levine (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3660119/), which is based on the Klemera-Doubal Method for calculating biological age (https://www.ncbi.nlm.nih.gov/pubmed/16318865). It features my original SAS implementation of the project, then a cleaner python script. The original paper was written to stratify males and females, but it is recognized here that this may not be the case for all implementations. Therefore, you can create "One Group" version is available, which includes no stratification (See _How to Use_).
