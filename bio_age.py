@@ -14,7 +14,7 @@
 # * Edited so it works as an importable notebook  
 #     **Note: if you want to change the parameters GRAPHON or AGEON, you have to do it through the KDM method in the Methods Class in self.__init__()
 
-# In[27]:
+# In[13]:
 
 
 from numpy import mean, corrcoef, array
@@ -30,7 +30,7 @@ import numpy as np
 import datetime
 
 
-# In[5]:
+# In[4]:
 
 
 """BIOLOGICAL AGE ALGORITHM
@@ -60,7 +60,7 @@ Visualize:
 
 # ### Open Data
 
-# In[6]:
+# In[15]:
 
 
 ################## CLASS SUMMARY #######################
@@ -68,31 +68,35 @@ Visualize:
 #Double check means
 #Make a dictionary of the means of each thing, turn into a function
 class Summary(object):
-    def __init__(self, dataframe, age, samp_wtIndex):
+    def __init__(self, dataframe, age, samp_wtIndex, primarykey):
         header_names = list(dataframe)
         temp = dataframe.values.tolist()
         temp.insert(0, header_names)
         
+        self.primarykey = primarykey
         self.data = temp
         self.view = dataframe
         self.age = age
         self.samp_wt = samp_wtIndex
 
-    def mean(self, lowerboundage=30, upperboundage=75):
+    def mean(self, lowerboundage=0, upperboundage=999):
         avgdict = {}
         floatdum = 3.0
         # cols 0 - 16
         for col in range(len(self.data[0])):
             avglist = []
             sampwtlist = []
-
+            
+            if col == self.primarykey:
+                continue
+            
             for line in self.data[1:]:
 
                 if line[self.age] >= lowerboundage and line[self.age] <= upperboundage and type(line[col]) == type(floatdum):
                     avglist.append(line[col])
                     sampwtlist.append(line[self.samp_wt])
-
-            avgdict[self.data[0][col]] = mean(avglist) #sum([i * j for i,j in zip(avglist, sampwtlist)])/len(avglist)
+                
+            avgdict[self.data[0][col]] = np.mean(avglist) #sum([i * j for i,j in zip(avglist, sampwtlist)])/len(avglist)
 
         self.make_pretty(avgdict,"MEANS:")
         return avgdict
@@ -165,7 +169,7 @@ class Summary(object):
         return (corrlist1, corrlist2)
 
 
-# In[21]:
+# In[16]:
 
 
 
@@ -508,7 +512,7 @@ class Methods(object):
             return (len(col1), len(col2))
 
 
-# In[22]:
+# In[17]:
 
 
 class Visualize(object):
@@ -539,7 +543,7 @@ class Visualize(object):
 
 # ### Run Function
 
-# In[23]:
+# In[18]:
 
 
 def KDM_model(trainset, testset, cachename, output_filename, age_index, genderindex, primaryindex, samp_wt_index):
@@ -563,7 +567,7 @@ def KDM_model(trainset, testset, cachename, output_filename, age_index, genderin
 
 # ### Return Stats
 
-# In[24]:
+# In[19]:
 
 
 #Return statistics for a correlation
@@ -574,11 +578,12 @@ def return_stats(x,y, dec=3):
     Medr = np.median(abs(x-y))
     Mpr = np.median(100*abs((x-y)/x))
     rs = r_value**2
+    print(r_value)
     
     return(Mr, Medr, Mpr, p_value, rs)
 
 
-# In[11]:
+# In[20]:
 
 
 print('You are running BA_NB_Final at', datetime.datetime.now())
